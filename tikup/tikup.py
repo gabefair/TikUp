@@ -24,7 +24,7 @@ def getUsernameVideos(username, limit):
         count = int(limit)
     else:
         count = 9999
-    tiktoks = api.byUsername(username, count=count)
+    tiktoks = api.by_username(username, count=count)
     return tiktoks
 
 
@@ -33,7 +33,7 @@ def getHashtagVideos(hashtag, limit):
         count = int(limit)
     else:
         count = 9999
-    tiktoks = api.byHashtag(hashtag, count=count)
+    tiktoks = api.by_hashtag(hashtag, count=count)
     return tiktoks
 
 
@@ -42,7 +42,7 @@ def getLikedVideos(username, limit):
         count = int(limit)
     else:
         count = 9999
-    tiktoks = api.userLikedbyUsername(username, count=count)
+    tiktoks = api.user_liked_by_username(username, count=count)
     return tiktoks
 
 def downloadTikTok(username, tiktok, cwd, varTry, did):
@@ -77,7 +77,7 @@ def downloadTikTok(username, tiktok, cwd, varTry, did):
                 ydl.download(['https://www.tiktok.com/@' + username + '/video/' + tiktokID])
         else:
             mp4 = open(tiktokID + '.mp4', "wb")
-            mp4.write(api.get_Video_By_DownloadURL(tiktok['itemInfo']['itemStruct']['video']['downloadAddr'], custom_did=did))
+            mp4.write(api.get_video_by_download_url(tiktok['itemInfo']['itemStruct']['video']['downloadAddr'], custom_did=did))
             mp4.close()
             #shutil.rmtree('tmp')
         try:
@@ -198,7 +198,7 @@ def doesIdExist(lines, tiktok):
 
 
 def getUsername(tiktokId):
-    thing = api.getTikTokById(tiktokId)
+    thing = api.get_tiktok_by_id(tiktokId)
     try:
         return thing['itemInfo']['itemStruct']['author']['uniqueId']
     except:
@@ -206,7 +206,7 @@ def getUsername(tiktokId):
 
 
 def getTikTokObject(tiktokId, did):
-    thing = api.getTikTokById(tiktokId, custom_did=did)
+    thing = api.get_tiktok_by_id(tiktokId, custom_did=did)
     return thing
 
 
